@@ -334,8 +334,19 @@ function selectMany(arr, childrenSelector) {
  *   calculateBalance([ [ 10, 8 ], [ 1, 5 ] ])  => (10 - 8) + (1 - 5) = 2 + -4 = -2
  *   calculateBalance([]) => 0
  */
-function calculateBalance(/* arr */) {
-  throw new Error('Not implemented');
+function calculateBalance(arr) {
+  const differences = arr.map((month) => {
+    const income = month[0];
+    const expense = month[1];
+    const difference = income - expense;
+    return difference;
+  });
+  const balance = differences.reduce((acc, diff) => {
+    const newBalance = acc + diff;
+    return newBalance;
+  }, 0);
+
+  return balance;
 }
 
 /**
@@ -350,8 +361,16 @@ function calculateBalance(/* arr */) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const divideArray = (array) => {
+    if (array.length === 0) {
+      return [];
+    }
+    const firstChunk = array.slice(0, chunkSize);
+    const remainingChunks = divideArray(array.slice(chunkSize));
+    return [firstChunk, ...remainingChunks];
+  };
+  return divideArray(arr);
 }
 
 /**
@@ -366,8 +385,13 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  const emptyArray = Array.from({ length: len });
+  const oddNumbers = emptyArray.map((el, i) => {
+    const oddNumber = i * 2 + 1;
+    return oddNumber;
+  });
+  return oddNumbers;
 }
 
 /**
